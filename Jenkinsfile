@@ -7,9 +7,10 @@ pipeline {
     environment { 
         GREETING = 'Hello Jenkins'
     }
-    options {
-        timeout(time: 1, unit: 'SECONDS')
-        disableConcurrentBuilds()
+    # used to get timeour if it takes more than a second
+    options {  
+        timeout(time: 1, unit: 'HOURS')
+        disableConcurrentBuilds() # it will not aloow you to run multiple buils at a time
     }
     //build
     stages {
