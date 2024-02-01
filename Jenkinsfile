@@ -1,16 +1,15 @@
 pipeline {
     agent {
         node {
-            label 'Agent-1'
+            label 'AGENT-1'
         }
     }
     environment { 
         GREETING = 'Hello Jenkins'
     }
-    // used to get timeour if it takes more than a second
-    options {  
+    options {
         timeout(time: 1, unit: 'HOURS')
-        disableConcurrentBuilds() //it will not aloow you to run multiple buils at a time
+        disableConcurrentBuilds()
     }
     parameters {
         string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
@@ -23,7 +22,7 @@ pipeline {
 
         password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'Enter a password')
     }
-    //build
+    // build
     stages {
         stage('Build') {
             steps {
@@ -38,9 +37,9 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh """
-                     echo  "Here I wrote shell script"
+                    echo  "Here I wrote shell script"
                     echo "$GREETING"
-                    sleep 10
+                    #sleep 10
                 """
             }
         }
@@ -60,7 +59,7 @@ pipeline {
             }
         }
     }
-// post build
+    // post build
     post { 
         always { 
             echo 'I will always say Hello again!'
@@ -73,4 +72,3 @@ pipeline {
         }
     }
 }
-
